@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- links -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <title>Monthly Expenses</title>
+  </head>
+
+  <body>
+    <main>
+      <div class="container">
+        <h1>Enter your cost of purchase!</h1>
+        <form>
+          <div class="cost">
+            <input type="text" placeholder="Cost of purchase" />
+            <span class="material-symbols-outlined"> add_circle </span>
+          </div>
+          <div class="checkboxes">
+            <div class="checkboxes-card">
+              <label for="card">Pay with card</label>
+              <input id="card" type="checkbox" name="card" />
+            </div>
+            <div class="checkboxes-cash">
+              <label for="cash">Pay with cash</label>
+              <input id="cash" type="checkbox" name="cash" />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="container expenses">
+        <div class="expenses-details">
+          <div class="expenses-item">
+            <p>Product</p>
+            <p>Cost</p>
+          </div>
+        </div>
+        <div class="expenses-total">
+          <div class="expenses-sum">
+            <p>Total cost:</p>
+            <p>250€</p>
+          </div>
+        </div>
+      </div>
+      <button>Clear monthly expenses</button>
+    </main>
+  </body>
+</html>
