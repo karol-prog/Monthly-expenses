@@ -16,40 +16,38 @@
 
   <body>
     <main>
-      <section class="container box">
-        <h1>Enter your cost of purchase!</h1>
-          <div class="cost">
-            <input id="product" type="text" placeholder="Product" />
-            <input id="cost" type="number" placeholder="Price" />
-            <button id="plus-button" class="plus-btn">+</button>
-          </div>
-          <!-- <div class="checkboxes">
-            <div class="checkboxes-card">
-              <label for="card">Pay with card</label>
-              <input id="card" type="checkbox" name="card" />
-            </div>
-            <div class="checkboxes-cash">
-              <label for="cash">Pay with cash</label>
-              <input id="cash" type="checkbox" name="cash" />
-            </div> -->
-          </div>
+      <section>
+        <h1>Enter the payment amount!</h1>
+        <input
+          id="product"
+          type="text"
+          placeholder="Product"
+          maxlength="10"
+          pattern="^[a-zA-Z]+$"
+        />
+        <input id="cost" type="number" placeholder="Price" />
+        <button id="plus-button" class="plus-btn"><span>Add Item</span></button>
       </section>
 
-      <section class="container expenses">
-        <div class="expenses-details" id="expenses-details">
-          <div class="expenses-title">
-            <p>Product</p>
-            <p>Cost</p>
+      <section>
+        <div class="wrapper">
+          <div class="expenses-details" id="expenses-details">
+            <div class="expenses-title">
+              <p>Product</p>
+              <p>Cost</p>
+            </div>
+          </div>
+          <div class="expenses-total">
+            <div class="expenses-sum">
+              <h3>Total cost:</h3>
+              <p id="total">0 €</p>
+            </div>
           </div>
         </div>
-        <div class="expenses-total">
-          <div class="expenses-sum">
-            <h3>Total cost:</h3>
-            <p id="total">0 €</p>
-          </div>
-        </div>
+        <button id="delete-all" class="delete-all">
+          <span>Delete All</span>
+        </button>
       </section>
-      <button>Clear monthly expenses</button>
     </main>
     <script src="app.js"></script>
   </body>

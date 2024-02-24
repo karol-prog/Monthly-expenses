@@ -6,21 +6,22 @@ const totalExpenses = document.getElementById("total");
 let myProducts = [];
 
 //eventlistener click to the plus btn
-plusBtn.addEventListener("click", () => {
+plusBtn.addEventListener("click", (e) => {
+  e.preventDefault();
   //calling all functions with arguments
-  storeTheProduct();
+  storeTheProduct(myProducts);
   renderProduct(myProducts);
   totalExp(myProducts);
 });
 
-function storeTheProduct() {
+function storeTheProduct(product) {
   //target the inputfields
   const productValue = document.getElementById("product").value;
   const costValue = document.getElementById("cost").value;
 
   //push these input values to the array
   if (productValue && costValue) {
-    myProducts.push({
+    product.push({
       name: productValue,
       cost: costValue,
     });
