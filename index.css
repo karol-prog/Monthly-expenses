@@ -26,20 +26,22 @@ h1 {
 section {
   text-align: center;
   background-color: var(--color-section);
-  max-width: 80%;
+  max-width: 70%;
   min-height: 200px;
   padding: 25px 50px;
   margin: 50px auto;
   border-radius: 20px;
+  transition: all 0.3s ease-out;
 }
 
 input {
+  width: 40%;
   margin: 16px;
   padding: 15px;
   text-align: center;
   font-size: 1rem;
   border: none;
-  border-radius: 20px;
+  border-radius: 30px;
 }
 
 button {
@@ -79,7 +81,6 @@ button span {
   font-size: 1rem;
   font-weight: 700;
   z-index: 1;
-  transition: all 0.3s ease-in-out;
 }
 
 button:hover span {
@@ -88,13 +89,10 @@ button:hover span {
 
 .wrapper {
   display: flex;
-  gap: 1rem;
   justify-content: center;
-  /* justify-content: space-around; */
-  margin-inline: auto;
 }
 
-.expenses-details {
+.expenses-wrapper {
   background-color: var(--color-btntext);
   width: 100%;
   min-height: 100px;
@@ -129,9 +127,18 @@ button:hover span {
 }
 
 @media screen and (max-width: 690px) {
+  section {
+    padding: 15px;
+  }
+
+  form {
+    text-align: center;
+  }
+  input {
+    width: 80%;
+  }
   .wrapper {
     flex-direction: column;
     align-items: center;
-    margin-inline: 20px;
   }
 }

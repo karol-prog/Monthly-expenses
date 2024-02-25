@@ -1,4 +1,24 @@
+//set up the firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import {
+  getDatabase,
+  ref,
+  push,
+  onValue,
+  remove,
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+const appSettings = {
+  databaseURL:
+    "https://monthly-expenses-fefec-default-rtdb.europe-west1.firebasedatabase.app/",
+};
+
+const app = initializeApp(appSettings);
+const database = getDatabase(app);
+const itemsInDB = ref(database, "expenses");
+
 const plusBtn = document.getElementById("plus-button");
+const deleteBtn = document.getElementById("delete-all");
 const expensesDetail = document.getElementById("expenses-details");
 const totalExpenses = document.getElementById("total");
 
@@ -12,6 +32,13 @@ plusBtn.addEventListener("click", (e) => {
   storeTheProduct(myProducts);
   renderProduct(myProducts);
   totalExp(myProducts);
+
+  dataToDatabase(myProducts);
+});
+
+//eventListener click to the delete all btn
+deleteBtn.addEventListener("click", () => {
+  deleteItemsInArr(myProducts);
 });
 
 function storeTheProduct(product) {
@@ -39,7 +66,7 @@ function productToHtml(product) {
 
   //loop throught the products and set the variable productHtml to the boilertemplate
   product.forEach((products) => {
-    productHtml = `
+    productHtml += `
       <div id="expenses-items" class="expenses-item">
         <p>${products.name}</p>
         <p>${products.cost}€</p>
@@ -55,7 +82,7 @@ function renderProduct(product) {
   //storing the previous function to variable
   let productToRender = productToHtml(product);
   //add these variable to the innerHtml of the div
-  expensesDetail.innerHTML += productToRender;
+  expensesDetail.innerHTML = productToRender;
 }
 
 //for sum the total expenses
@@ -71,3 +98,42 @@ function totalExp(product) {
   //write it to the innerText of p tag with id total
   totalExpenses.innerText = totalExpense + " €";
 }
+
+//for clearing the all divs what are added
+function deleteItemsInArr(product) {
+  //clear the array
+  if (product.length > 0) {
+    //target the added divs to the expenses-details (returning the Nodelist)
+    const expensesItems = document.querySelectorAll(".expenses-item");
+    //target every expenses-items in divs and remove it
+    expensesItems.forEach((item) => {
+      item.remove();
+    });
+    //set the total expenses display to 0
+    totalExpenses.innerText = "0 €";
+  }
+}
+
+//for pushing data to the database
+function dataToDatabase(product) {
+  product.forEach((item) => {
+    push(itemsInDB, item);
+  });
+}
+
+//fetching the data from database to the div
+function fetchTheData() {
+  //onValue firebase function for getting the data from itemsInDB
+  onValue(itemsInDB, (items) => {
+    //store the data to variable and change the data from object to the array of objects
+    let dataArray = Object.values(items.val());
+    //update the div with data from database
+    renderProduct(dataArray);
+  });
+}
+
+//call the function for fetching the data from firebase
+fetchTheData();
+
+//deleting items in database
+function dataDeleteinDatabase() {}

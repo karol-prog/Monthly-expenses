@@ -18,24 +18,29 @@
     <main>
       <section>
         <h1>Enter the payment amount!</h1>
-        <input
-          id="product"
-          type="text"
-          placeholder="Product"
-          maxlength="10"
-          pattern="^[a-zA-Z]+$"
-        />
-        <input id="cost" type="number" placeholder="Price" />
-        <button id="plus-button" class="plus-btn"><span>Add Item</span></button>
+        <form>
+          <input
+            id="product"
+            type="text"
+            placeholder="Product"
+            maxlength="10"
+          />
+          <input id="cost" type="number" placeholder="Price" maxlength="5" />
+          <button id="plus-button" class="plus-btn">
+            <span>Add Item</span>
+          </button>
+        </form>
       </section>
 
       <section>
         <div class="wrapper">
-          <div class="expenses-details" id="expenses-details">
+          <div class="expenses-wrapper">
             <div class="expenses-title">
               <p>Product</p>
               <p>Cost</p>
             </div>
+            <!-- div for adding items to it with JS -->
+            <div class="expenses-details" id="expenses-details"></div>
           </div>
           <div class="expenses-total">
             <div class="expenses-sum">
@@ -49,6 +54,6 @@
         </button>
       </section>
     </main>
-    <script src="app.js"></script>
+    <script src="app.js" type="module"></script>
   </body>
 </html>
