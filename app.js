@@ -30,17 +30,18 @@ plusBtn.addEventListener("click", (e) => {
   e.preventDefault();
   //calling all functions with arguments
   storeTheProduct(myProducts);
-  renderProduct(myProducts);
+  /* renderProduct(myProducts); */
   totalExp(myProducts);
-
-  dataToDatabase(myProducts);
 });
 
 //eventListener click to the delete all btn
 deleteBtn.addEventListener("click", () => {
   deleteItemsInArr(myProducts);
+
+  dataDeleteinDatabase();
 });
 
+//store the input values to the array and immidiatly to the firebase
 function storeTheProduct(product) {
   //target the inputfields
   const productValue = document.getElementById("product").value;
@@ -48,15 +49,20 @@ function storeTheProduct(product) {
 
   //push these input values to the array
   if (productValue && costValue) {
-    product.push({
+    const newItem = {
       name: productValue,
       cost: costValue,
-    });
-  }
+    };
+    //push it to the array
+    product.push(newItem);
 
-  //clear the inputs
-  document.getElementById("product").value = "";
-  document.getElementById("cost").value = "";
+    //push it also to the Firebase
+    push(itemsInDB, newItem);
+
+    //clear the inputs
+    document.getElementById("product").value = "";
+    document.getElementById("cost").value = "";
+  }
 }
 
 //function for adding items to the array
@@ -82,7 +88,7 @@ function renderProduct(product) {
   //storing the previous function to variable
   let productToRender = productToHtml(product);
   //add these variable to the innerHtml of the div
-  expensesDetail.innerHTML = productToRender;
+  expensesDetail.innerHTML += productToRender;
 }
 
 //for sum the total expenses
@@ -114,21 +120,20 @@ function deleteItemsInArr(product) {
   }
 }
 
-//for pushing data to the database
-function dataToDatabase(product) {
-  product.forEach((item) => {
-    push(itemsInDB, item);
-  });
-}
-
-//fetching the data from database to the div
+//fetching/getting the data from database to the div
 function fetchTheData() {
   //onValue firebase function for getting the data from itemsInDB
   onValue(itemsInDB, (items) => {
-    //store the data to variable and change the data from object to the array of objects
-    let dataArray = Object.values(items.val());
-    //update the div with data from database
-    renderProduct(dataArray);
+    //change the data from database object to the array
+    const dataToArr = Object.values(items.val());
+
+    //clear previous items before adding it from database
+    expensesDetail.innerHTML = "";
+
+    //loop throught each item in array
+    dataToArr.forEach((data) => {
+      renderProduct([data]);
+    });
   });
 }
 
@@ -136,4 +141,9 @@ function fetchTheData() {
 fetchTheData();
 
 //deleting items in database
-function dataDeleteinDatabase() {}
+function dataDeleteinDatabase() {
+  //get to the database
+  let dataToDelete = ref(database, "expenses");
+  //firebase remove function to remove all data
+  remove(dataToDelete);
+}
