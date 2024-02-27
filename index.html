@@ -11,6 +11,25 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="index.css" />
+    <!-- favicon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="images/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
     <title>Monthly Expenses</title>
   </head>
 
@@ -43,10 +62,8 @@
             <div class="expenses-details" id="expenses-details"></div>
           </div>
           <div class="expenses-total">
-            <div class="expenses-sum">
-              <h3>Total cost:</h3>
-              <p id="total">0 €</p>
-            </div>
+            <h3>Monthly expenses:</h3>
+            <p class="total" id="total">0 €</p>
           </div>
         </div>
         <button id="delete-all" class="delete-all">

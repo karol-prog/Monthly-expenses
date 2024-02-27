@@ -9,8 +9,8 @@
   --color-ptag: #000;
   --color-yellow: #ffd500;
   --color-section: #3c6e71;
-  --color-btnred: #c1121f;
   --color-btntext: #fff;
+  --color-total: #c1121f;
 }
 
 body {
@@ -111,6 +111,13 @@ button:hover span {
   background-color: var(--color-btntext);
 }
 
+.total {
+  margin-top: 10px;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--color-total);
+}
+
 .expenses-title {
   display: flex;
   justify-content: space-around;
@@ -120,9 +127,8 @@ button:hover span {
 }
 
 .expenses-item {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   padding-block: 10px;
 }
 

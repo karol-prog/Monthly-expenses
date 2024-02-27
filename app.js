@@ -31,14 +31,12 @@ plusBtn.addEventListener("click", (e) => {
   //calling all functions with arguments
   storeTheProduct(myProducts);
   /* renderProduct(myProducts); */
-  totalExp(myProducts);
+  /* totalExp(myProducts); */
 });
 
 //eventListener click to the delete all btn
 deleteBtn.addEventListener("click", () => {
   deleteItemsInArr(myProducts);
-
-  dataDeleteinDatabase();
 });
 
 //store the input values to the array and immidiatly to the firebase
@@ -91,8 +89,8 @@ function renderProduct(product) {
   expensesDetail.innerHTML += productToRender;
 }
 
-//for sum the total expenses
-function totalExp(product) {
+//for sum the total expenses - before firebase
+/* function totalExp(product) {
   //reduce method
   const totalExpense = product.reduce((total, product) => {
     //change the cost value from string to the number
@@ -103,7 +101,7 @@ function totalExp(product) {
 
   //write it to the innerText of p tag with id total
   totalExpenses.innerText = totalExpense + " €";
-}
+} */
 
 //for clearing the all divs what are added
 function deleteItemsInArr(product) {
@@ -115,8 +113,11 @@ function deleteItemsInArr(product) {
     expensesItems.forEach((item) => {
       item.remove();
     });
+
     //set the total expenses display to 0
     totalExpenses.innerText = "0 €";
+
+    deleteDataFromDB();
   }
 }
 
@@ -124,26 +125,43 @@ function deleteItemsInArr(product) {
 function fetchTheData() {
   //onValue firebase function for getting the data from itemsInDB
   onValue(itemsInDB, (items) => {
-    //change the data from database object to the array
-    const dataToArr = Object.values(items.val());
+    //set the variable for items values in firebase
+    const data = items.val();
 
-    //clear previous items before adding it from database
-    expensesDetail.innerHTML = "";
+    if (data) {
+      //change the data from database object to the array
+      const dataToArr = Object.values(data);
 
-    //loop throught each item in array
-    dataToArr.forEach((data) => {
-      renderProduct([data]);
-    });
+      //clear previous items before adding it from database
+      expensesDetail.innerHTML = "";
+
+      //sum the cost property of each array object
+      const totalCost = dataToArr.reduce((total, data) => {
+        //change it from string to a number
+        const cost = parseInt(data.cost);
+        //return the sum
+        return total + cost;
+      }, 0);
+
+      totalExpenses.innerText = totalCost + " €";
+
+      //loop throught each item in array
+      dataToArr.forEach((data) => {
+        //render out the data from database
+        renderProduct([data]);
+      });
+    } else {
+      console.log("no data available");
+    }
   });
 }
 
 //call the function for fetching the data from firebase
 fetchTheData();
 
-//deleting items in database
-function dataDeleteinDatabase() {
-  //get to the database
+function deleteDataFromDB() {
+  //firebase data
   let dataToDelete = ref(database, "expenses");
-  //firebase remove function to remove all data
+  //firebasee function for deleting the data
   remove(dataToDelete);
 }
