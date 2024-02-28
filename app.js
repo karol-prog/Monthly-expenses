@@ -144,6 +144,7 @@ fetchTheData();
 function deleteDataFromDB() {
   //firebase data
   let dataToDelete = ref(database, "expenses");
+
   //firebasee function for deleting the data
   remove(dataToDelete);
 }
