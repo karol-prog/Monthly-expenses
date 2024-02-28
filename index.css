@@ -132,6 +132,10 @@ button:hover span {
   padding-block: 10px;
 }
 
+.expenses-details {
+  margin-top: 10px;
+}
+
 @media screen and (max-width: 690px) {
   section {
     padding: 15px;

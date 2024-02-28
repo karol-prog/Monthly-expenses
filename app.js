@@ -1,3 +1,6 @@
+//import firebaseSettings
+import { firebaseConfig } from "./firebaseConfig.js";
+
 //set up the firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import {
@@ -8,12 +11,7 @@ import {
   remove,
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-const appSettings = {
-  databaseURL:
-    "https://monthly-expenses-fefec-default-rtdb.europe-west1.firebasedatabase.app/",
-};
-
-const app = initializeApp(appSettings);
+const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const itemsInDB = ref(database, "expenses");
 
@@ -30,8 +28,6 @@ plusBtn.addEventListener("click", (e) => {
   e.preventDefault();
   //calling all functions with arguments
   storeTheProduct(myProducts);
-  /* renderProduct(myProducts); */
-  /* totalExp(myProducts); */
 });
 
 //eventListener click to the delete all btn
@@ -89,20 +85,6 @@ function renderProduct(product) {
   expensesDetail.innerHTML += productToRender;
 }
 
-//for sum the total expenses - before firebase
-/* function totalExp(product) {
-  //reduce method
-  const totalExpense = product.reduce((total, product) => {
-    //change the cost value from string to the number
-    const cost = parseInt(product.cost);
-    //return the sum
-    return total + cost;
-  }, 0);
-
-  //write it to the innerText of p tag with id total
-  totalExpenses.innerText = totalExpense + " €";
-} */
-
 //for clearing the all divs what are added
 function deleteItemsInArr(product) {
   //clear the array
@@ -151,7 +133,7 @@ function fetchTheData() {
         renderProduct([data]);
       });
     } else {
-      console.log("no data available");
+      expensesDetail.innerHTML = "No data available";
     }
   });
 }
