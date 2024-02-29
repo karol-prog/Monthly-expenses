@@ -1,6 +1,3 @@
-//import firebaseSettings
-import { firebaseConfig } from "./firebaseConfig.js";
-
 //set up the firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import {
@@ -10,6 +7,10 @@ import {
   onValue,
   remove,
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+const firebaseConfig = {
+  databaseURL: process.env.FIREBASE_CONFIG_URL,
+};
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
