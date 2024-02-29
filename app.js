@@ -9,7 +9,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 const firebaseConfig = {
-  databaseURL: process.env.FIREBASE_CONFIG_URL,
+  databaseURL:
+    "https://monthly-expenses-fefec-default-rtdb.europe-west1.firebasedatabase.app/",
 };
 
 const app = initializeApp(firebaseConfig);
